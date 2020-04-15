@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <!--https://github.com/TakashiYoshinaga/Oculus-Quest-Input-Sample-->
+  <head>
+    <meta charset="utf-8" />
+    <title>Oculus Quest Input</title>
+    <meta name="description" content="Oculus Quest Input" />
+    <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+  </head>
+  <body>
+    <script>
+      AFRAME.registerComponent("scale-on-mouseenter", {
+        schema: {
+          to: { default: "2.5 2.5 2.5", type: "vec3" },
+        },
+
+        init: function () {
+          var data = this.data;
+          var el = this.el;
+          this.el.addEventListener("mouseenter", function () {
+            el.object3D.scale.copy(data.to);
+          });
+        },
+      });
+    </script>
+    <a-scene background="#fff">
+      <!-- <a-assets>
+        <img id="boxTexture" src="https://i.imgur.com/mYmmbrp.jpg" />
+        <img
+          id="skyTexture"
+          src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg"
+        />
+        <img
+          id="groundTexture"
+          src="https://cdn.aframe.io/a-painter/images/floor.jpg"
+        />
+        <audio
+          src="https://cdn.aframe.io/basic-guide/audio/backgroundnoise.wav"
+          autoplay
+          preload
+        ></audio>
+      </a-assets> -->
+      <!-- <a-box
+        src="#boxTexture"
+        position="0 2 -5"
+        rotation="0 45 45"
+        scale="2 2 2"
+        animation__position="property: object3D.position.y; to: 2.2; dir: alternate; dur: 2000; loop: true"
+        animation__mouseenter="property: scale; to: 2.3 2.3 2.3; dur: 300; startEvents: mouseenter"
+        animation__mouseleave="property: scale; to: 2 2 2; dur: 300; startEvents: mouseleave"
+      ></a-box> -->
+      <a-plane
+        id="ground"
+        color="black"
+        rotation="-90 0 0"
+        position="0 -.2 0"
+        width="400"
+        height="400"
+        material=""
+        geometry=""
+      ></a-plane>
+      <a-plane
+        id="field"
+        color="#9b7653"
+        rotation="-90 45 0"
+        position="0 0 -85.333"
+        width="121"
+        height="121"
+        material=""
+        geometry=""
+      ></a-plane>
+      <a-plane
+        id="infield_grass"
+        color="#567d46"
+        position="0 0.0508 -19.180"
+        rotation="-90 -45 0"
+        width="27.432"
+        height="27.432"
+      ></a-plane>
+      <a-sphere
+        id="mound"
+        color="#9b7653"
+        position="0 -5.2324 -18.4404"
+        color="yellow"
+        radius="5.4864"
+      ></a-sphere>
+      <a-sphere
+        id="ball"
+        radius="0.0365"
+        color="white"
+        position="0 2 -18.4404"
+      ></a-sphere>
+      <a-plane
+        id="home_plate"
+        color="white"
+        position="0 .06 0"
+        rotation="-90 0 0"
+        width=".4318"
+        height=".4318"
+      ></a-plane>
+      <a-plane
+        id="first_base"
+        color="white"
+        position="19.39615 0.13 -19.45095"
+        rotation="-90 -45 0"
+        width="0.381"
+        height="0.381"
+        material=""
+        geometry=""
+      ></a-plane>
+      <a-plane
+        id="second_base"
+        color="white"
+        position="0 0.13 -38.91521"
+        rotation="-90 -45 0"
+        width="0.381"
+        height="0.381"
+        material=""
+        geometry=""
+      ></a-plane>
+      <a-plane
+        id="third_base"
+        color="white"
+        position="-19.39615 0.13 -19.45095"
+        rotation="-90 -45 0"
+        width="0.381"
+        height="0.381"
+        material=""
+        geometry=""
+      ></a-plane>
+      <a-sky id="sky" color="#87ceeb"></a-sky>
+      <a-light type="ambient" color="white"></a-light>
+
+      <!-- 6' tall -->
+      <a-camera id="batter" position="-0.474 1.8288 0">
+        <a-cursor></a-cursor>
+      </a-camera>
+
+      <!-- <a-entity environment="preset: forest; dressingAmount: 500"></a-entity> -->
+
+      <!-- <a-entity id="ctrlL" oculus-touch-controls="hand: left"></a-entity>
+      <a-entity
+        laser-controls="hand: right"
+        line="color: red; opacity: 0.75"
+      ></a-entity> -->
+    </a-scene>
+  </body>
+</html>
