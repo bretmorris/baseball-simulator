@@ -3,55 +3,27 @@
   <!--https://github.com/TakashiYoshinaga/Oculus-Quest-Input-Sample-->
   <head>
     <meta charset="utf-8" />
-    <title>Oculus Quest Input</title>
+    <title>Baseball simulator</title>
     <meta name="description" content="Oculus Quest Input" />
-    <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="./index.js"></script>
   </head>
   <body>
-    <script>
-      AFRAME.registerComponent("scale-on-mouseenter", {
-        schema: {
-          to: { default: "2.5 2.5 2.5", type: "vec3" },
-        },
-
-        init: function () {
-          var data = this.data;
-          var el = this.el;
-          this.el.addEventListener("mouseenter", function () {
-            el.object3D.scale.copy(data.to);
-          });
-        },
-      });
-    </script>
-    <a-scene background="#fff">
-      <!-- <a-assets>
-        <img id="boxTexture" src="https://i.imgur.com/mYmmbrp.jpg" />
-        <img
-          id="skyTexture"
-          src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg"
-        />
-        <img
-          id="groundTexture"
-          src="https://cdn.aframe.io/a-painter/images/floor.jpg"
-        />
-        <audio
-          src="https://cdn.aframe.io/basic-guide/audio/backgroundnoise.wav"
-          autoplay
-          preload
-        ></audio>
-      </a-assets> -->
-      <!-- <a-box
-        src="#boxTexture"
-        position="0 2 -5"
-        rotation="0 45 45"
-        scale="2 2 2"
-        animation__position="property: object3D.position.y; to: 2.2; dir: alternate; dur: 2000; loop: true"
-        animation__mouseenter="property: scale; to: 2.3 2.3 2.3; dur: 300; startEvents: mouseenter"
-        animation__mouseleave="property: scale; to: 2 2 2; dur: 300; startEvents: mouseleave"
-      ></a-box> -->
+    <a-scene background="#fff" debug-controller>
+      <a-entity
+        id="secondaryHand"
+        oculus-touch-controls="hand: left"
+      ></a-entity>
+      <a-entity
+        id="primaryHand"
+        oculus-touch-controls="hand: right"
+        trigger-listener
+      ></a-entity>
       <a-plane
         id="ground"
+        static-body
         color="black"
         rotation="-90 0 0"
         position="0 -.2 0"
@@ -62,6 +34,7 @@
       ></a-plane>
       <a-plane
         id="field"
+        static-body
         color="#9b7653"
         rotation="-90 45 0"
         position="0 0 -85.333"
@@ -72,6 +45,7 @@
       ></a-plane>
       <a-plane
         id="infield_grass"
+        static-body
         color="#567d46"
         position="0 0.0508 -19.180"
         rotation="-90 -45 0"
@@ -80,12 +54,15 @@
       ></a-plane>
       <a-sphere
         id="mound"
+        static-body
         color="#9b7653"
         position="0 -5.2324 -18.4404"
         color="yellow"
         radius="5.4864"
       ></a-sphere>
       <a-sphere
+        reset-baseball
+        animation="property: position; to: 0 0.9144 0; dur: 375; startEvents: throw"
         id="ball"
         radius="0.0365"
         color="white"
@@ -93,6 +70,7 @@
       ></a-sphere>
       <a-plane
         id="home_plate"
+        static-body
         color="white"
         position="0 .06 0"
         rotation="-90 0 0"
@@ -101,6 +79,7 @@
       ></a-plane>
       <a-plane
         id="first_base"
+        static-body
         color="white"
         position="19.39615 0.13 -19.45095"
         rotation="-90 -45 0"
@@ -111,6 +90,7 @@
       ></a-plane>
       <a-plane
         id="second_base"
+        static-body
         color="white"
         position="0 0.13 -38.91521"
         rotation="-90 -45 0"
@@ -121,6 +101,7 @@
       ></a-plane>
       <a-plane
         id="third_base"
+        static-body
         color="white"
         position="-19.39615 0.13 -19.45095"
         rotation="-90 -45 0"
@@ -136,14 +117,6 @@
       <a-camera id="batter" position="-0.474 1.8288 0">
         <a-cursor></a-cursor>
       </a-camera>
-
-      <!-- <a-entity environment="preset: forest; dressingAmount: 500"></a-entity> -->
-
-      <!-- <a-entity id="ctrlL" oculus-touch-controls="hand: left"></a-entity>
-      <a-entity
-        laser-controls="hand: right"
-        line="color: red; opacity: 0.75"
-      ></a-entity> -->
     </a-scene>
   </body>
 </html>
